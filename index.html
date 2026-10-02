@@ -1,222 +1,281 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LA FUENTE BLOODLINE</title>
+<title>Rose For You From AIM 🌹</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap');
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-font-family:'Poppins', Arial, Helvetica, sans-serif; /* Naglagay ng backup na font */
-overflow-x:hidden;
-color: #f8f8f8; /* Mas maliwanag na kulay */
-background:black;
-line-height: 1.6; /* Maayos na taas ng linya */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-/* BACKGROUND */
-.bg{
-position:fixed;
-inset:0;
-background:url('https://media.discordapp.net/attachments/1513918459636092998/1515232700502380544/IMG_20260609_004414.png?ex=6a2e41eb&is=6a2cf06b&hm=7ada6464733f2f5522a10507faf9ffaf1799a4dcaf82d9e9e73d1f54c24e22b1&=&format=webp')
-center/cover no-repeat;
-filter:brightness(0.35) contrast(1.2);
-z-index:-3;
+body {
+    height: 100vh;
+    overflow: hidden;
+    background: radial-gradient(circle at bottom, #172044, #080b1c 65%, #02030b);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    color: white;
 }
 
-.overlay{
-position:fixed;
-inset:0;
-background:radial-gradient(circle,transparent 30%,rgba(0,0,0,0.9));
-z-index:-2;
+/* STARS */
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
 }
 
-/* INTRO SCREEN */
-#intro{
-position:fixed;
-inset:0;
-display:flex;
-justify-content:center;
-align-items:center;
-background:black;
-z-index:9999;
-cursor:pointer;
-transition:1.2s ease;
+.star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate,
+               float 8s infinite linear;
 }
 
-#intro h1{
-font-family:'Cinzel',serif;
-font-size:4rem;
-color:#ff0000;
-text-shadow:0 0 20px red,0 0 60px darkred;
-animation:pulse 1.8s infinite;
+@keyframes twinkle {
+    from { opacity: .2; transform: scale(.6); }
+    to { opacity: 1; transform: scale(1.5); }
 }
 
-@keyframes pulse{
-0%,100%{transform:scale(1);}
-50%{transform:scale(1.1);}
+@keyframes float {
+    from { translate: 0 0; }
+    to { translate: 30px -50px; }
 }
 
-/* TITLE */
-.header{
-text-align:center;
-padding:60px 20px 20px;
+/* MOON */
+.moon {
+    position: absolute;
+    top: 9%;
+    right: 15%;
+    width: 75px;
+    height: 75px;
+    border-radius: 50%;
+    background: #fff3d1;
+    box-shadow: 0 0 35px #fff1b8, 0 0 90px #ffffff55;
 }
 
-.header h1{
-font-family:'Cinzel',serif;
-font-size:clamp(2.5rem, 5vw, 4.5rem); /* Kasya sa lahat ng laki ng screen */
-color:#ff1a1a;
-text-shadow:0 0 20px red,0 0 50px red;
-letter-spacing:4px;
+/* MAIN */
+.container {
+    position: relative;
+    z-index: 2;
+    text-align: center;
 }
 
-/* TREE - Inayos para hindi maputol ang mga pangalan */
-.tree{
-max-width:1100px;
-margin:auto;
-padding:40px 20px 60px; /* Dagdag na espasyo sa ibaba */
-display:flex;
-flex-direction:column;
-gap:25px;
-min-height: auto;
-overflow: visible;
+h1 {
+    font-size: clamp(23px, 5vw, 38px);
+    color: #ffd6e4;
+    text-shadow: 0 0 15px #ff477e;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: 1.5s ease;
+    margin-top: 40px;
 }
 
-.card{
-background:rgba(255,255,255,0.06);
-backdrop-filter:blur(15px);
-border:1px solid rgba(255,0,0,0.35);
-border-radius:16px;
-padding:25px;
-box-shadow:0 0 25px rgba(255,0,0,0.25);
-animation:fadeUp 1s ease;
+h1.show {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-.card h2{
-text-align:center;
-color:#ff5555; /* Mas maliwanag na pula */
-margin-bottom:15px;
-text-shadow:0 0 12px rgba(255,0,0,0.6);
-font-size: 1.7rem;
+.subtitle {
+    color: #e9c5d5;
+    margin-top: 12px;
+    letter-spacing: 3px;
+    opacity: 0;
+    transition: 2s;
 }
 
-/* MEMBER - Inayos para malinaw at may espasyo */
-.member{
-text-align:center;
-padding: 7px 0;
-color: #ffffff; /* Purong puti para siguradong makita */
-font-size: 1.1rem;
-font-weight: 400;
-letter-spacing: 0.5px;
+.subtitle.show {
+    opacity: 1;
 }
 
-@keyframes fadeUp{
-from{opacity:0;transform:translateY(30px);}
-to{opacity:1;transform:translateY(0);}
+/* ROSE */
+.rose {
+    position: relative;
+    width: 160px;
+    height: 230px;
+    margin: auto;
+    cursor: pointer;
 }
 
-/* PARTICLES */
-.particle{
-position:fixed;
-width:3px;
-height:3px;
-background:red;
-border-radius:50%;
-box-shadow:0 0 10px red;
-animation:float linear infinite;
+.stem {
+    position: absolute;
+    width: 5px;
+    height: 125px;
+    background: linear-gradient(to right, #164b28, #48a35b);
+    left: 78px;
+    top: 90px;
+    border-radius: 10px;
 }
 
-@keyframes float{
-from{transform:translateY(100vh);opacity:0;}
-20%{opacity:1;}
-to{transform:translateY(-100vh);opacity:0;}
+.leaf {
+    position: absolute;
+    width: 40px;
+    height: 20px;
+    background: #287c42;
+    border-radius: 100% 0 100% 0;
+    top: 155px;
+    left: 40px;
+    transform: rotate(20deg);
+}
+
+.leaf.right {
+    left: 82px;
+    transform: rotate(75deg);
+}
+
+.flower {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    left: 30px;
+    top: 15px;
+    transform: scale(.8);
+    transition: transform 2s ease;
+    filter: drop-shadow(0 0 15px #ff174f88);
+}
+
+.petal {
+    position: absolute;
+    width: 48px;
+    height: 65px;
+    background: linear-gradient(135deg, #ff799c, #d90042 75%);
+    border-radius: 50% 50% 35% 35%;
+    transform-origin: bottom center;
+    bottom: 10px;
+    left: 26px;
+    transition: transform 2s cubic-bezier(.2,.8,.3,1);
+}
+
+.petal:nth-child(1) { transform: rotate(0deg); }
+.petal:nth-child(2) { transform: rotate(72deg); }
+.petal:nth-child(3) { transform: rotate(144deg); }
+.petal:nth-child(4) { transform: rotate(216deg); }
+.petal:nth-child(5) { transform: rotate(288deg); }
+
+.center {
+    position: absolute;
+    width: 32px;
+    height: 32px;
+    background: radial-gradient(circle, #ffb1c6, #a90034);
+    border-radius: 50%;
+    left: 34px;
+    top: 44px;
+    z-index: 3;
+}
+
+.open .flower {
+    transform: scale(1.2);
+}
+
+.open .petal:nth-child(1) { transform: rotate(-30deg) translateY(-20px); }
+.open .petal:nth-child(2) { transform: rotate(55deg) translate(20px,-5px); }
+.open .petal:nth-child(3) { transform: rotate(125deg) translate(20px,5px); }
+.open .petal:nth-child(4) { transform: rotate(235deg) translate(-20px,5px); }
+.open .petal:nth-child(5) { transform: rotate(305deg) translate(-20px,-5px); }
+
+.instruction {
+    color: #ffd6e4;
+    margin-top: 5px;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: .4; }
+}
+
+@media(max-width: 480px) {
+    .moon {
+        width: 55px;
+        height: 55px;
+        right: 10%;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<div class="bg"></div>
-<div class="overlay"></div>
+<div class="stars" id="stars"></div>
+<div class="moon"></div>
 
-<!-- 🔊 AUDIO -->
-<audio id="bgm" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_c8b8f1f2c3.mp3?filename=dark-mystery-trailer-110233.mp3" type="audio/mpeg">
+<div class="container">
+    <div class="rose" id="rose">
+        <div class="stem"></div>
+        <div class="leaf"></div>
+        <div class="leaf right"></div>
 
+        <div class="flower">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+        </div>
+    </div>
 
-<!-- INTRO -->
-<div id="intro">
-<h1>CLICK TO ENTER</h1>
+    <p class="instruction" id="instruction">Click the rose to open 🌹</p>
+
+    <h1 id="message">ROSE FOR YOU FROM AIM</h1>
+    <p class="subtitle" id="subtitle">A little flower, with a lot of love. ♡</p>
 </div>
 
-<div class="header">
-<h1>LA FUENTE BLOODLINE</h1>
-</div>
-
-<div class="tree">
-
-<div class="card">
-<h2>FAMILY HEAD</h2>
-<div class="member">VEL V. LA FUENTE</div>
-<div class="member">EYRON C. LA FUENTE</div>
-<div class="member">JAY LA FUENTE</div>
-<div class="member">MIKE S. LA FUENTE</div>
-<div class="member">SILI D. LA FUENTE</div>
-<div class="member">AIM V. LA FUENTE</div>
-</div>
-
-<div class="card">
-<h2>MATRIARCH</h2>
-<div class="member">RIRI C. LA FUENTE</div>
-</div>
-
-<div class="card">
-<h2>SECOND GENERATION</h2>
-<div class="member">Scarlett B. La Fuente</div>
-<div class="member">Qivan B. La Fuente</div>
-<div class="member">Jewel C. La Fuente</div>
-<div class="member">Shanti C. La Fuente</div>
-<div class="member">Kydii C. La Fuente</div>
-<div class="member">Scyte La Fuente</div>
-<div class="member">Brent S. La Fuente</div>
-<div class="member">Blue D. La Fuente</div>
-<div class="member">Dalixzs D. La Fuente</div>
-</div>
-
-</div>
+<!-- Replace love-song.mp3 with your own music file or URL -->
+<audio id="music" loop>
+    <source src="love-song.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* PARTICLES */
-for(let i=0;i<60;i++){
-let p=document.createElement("div");
-p.classList.add("particle");
-p.style.left=Math.random()*100+"vw";
-p.style.animationDuration=(4+Math.random()*8)+"s";
-document.body.appendChild(p);
+// GENERATE STARS
+const stars = document.getElementById("stars");
+
+for (let i = 0; i < 120; i++) {
+    const star = document.createElement("div");
+    star.className = "star";
+
+    const size = Math.random() * 3 + 1;
+
+    star.style.width = size + "px";
+    star.style.height = size + "px";
+    star.style.left = Math.random() * 100 + "%";
+    star.style.top = Math.random() * 100 + "%";
+    star.style.animationDelay = Math.random() * 3 + "s";
+    star.style.animationDuration = (2 + Math.random() * 5) + "s";
+
+    stars.appendChild(star);
 }
 
-/* CLICK TO ENTER */
-document.getElementById("intro").addEventListener("click", async () => {
-const intro = document.getElementById("intro");
-const audio = document.getElementById("bgm");
+// OPEN ROSE
+const rose = document.getElementById("rose");
+const message = document.getElementById("message");
+const subtitle = document.getElementById("subtitle");
+const instruction = document.getElementById("instruction");
+const music = document.getElementById("music");
 
-intro.style.opacity = "0";
+rose.addEventListener("click", () => {
+    if (rose.classList.contains("open")) return;
 
-setTimeout(()=>intro.style.display="none",1200);
+    rose.classList.add("open");
+    instruction.style.opacity = "0";
 
-try {
-audio.volume = 0.6;
-await audio.play();
-} catch (e) {
-console.log("Audio blocked:", e);
-}
+    setTimeout(() => {
+        message.classList.add("show");
+        subtitle.classList.add("show");
+    }, 1800);
+
+    music.play().catch(() => {
+        console.log("Music requires a user interaction.");
+    });
 });
 </script>
 
 </body>
 </html>
+```
